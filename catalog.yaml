@@ -1,0 +1,4 @@
+type: pipeline-template-catalog
+version: 1
+name: VM creation using Terrform 
+displayName: VM creation using Terrform 
