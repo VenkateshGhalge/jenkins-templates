@@ -1,0 +1,13 @@
+type: pipeline-template
+version: 1
+
+name: VM creation using Terrform
+description: creating the VM using terrform 
+parameters:
+  - name: repoUrl
+    type: string
+    displayName: Respository URL
+  - name: branchName
+    type: string
+    displayName: Branch Name
+    defaultValue: "main"
