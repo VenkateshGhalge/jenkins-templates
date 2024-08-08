@@ -3,7 +3,7 @@
 userScm = [
   $class: 'GitScm',
   userRemoteConfigs: [[creadtialsId: '', url: "${getRepo}"]],
-  branches: [[name: "$(gitBranch)"]]
+  branches: [[name: "${gitBranch}"]]
 ]
 
 stage 'Pre-configure'
