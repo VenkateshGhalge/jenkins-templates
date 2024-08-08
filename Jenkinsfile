@@ -1,5 +1,6 @@
 // generating the SCM object 
-@Library('jenkins-templates').template.vm_creation.terraform.gitcall()
+@Library('jenkins-templates')
+
 userScm = [
   $class: 'GitScm',
   userRemoteConfigs: [[creadtialsId: '', url: "${getRepo}"]],
