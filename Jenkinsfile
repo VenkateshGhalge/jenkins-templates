@@ -6,7 +6,5 @@ userScm = [
   branches: [[name: "${gitBranch}"]]
 ]
 
-stage 'Pre-configure'
-{
   gitcall(userScm)
-}
+
