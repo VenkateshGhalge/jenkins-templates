@@ -1,5 +1,7 @@
 pipeline{
-  
+ agent {
+        // Define agent details here
+    }  
 
   environment{
     AZURE_CLIENT_ID = credentials("AZURE_CLIENT_ID")
