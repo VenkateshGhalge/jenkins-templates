@@ -20,7 +20,7 @@ pipeline{
     }
     stage("git checkout"){
       steps {
-                sh 'git clone ${params.URL}'
+               git branch: 'main', changelog: false, poll: false, url: 'https://github.com/VenkateshGhalge/Terraform.git'
             }
     }
   }
