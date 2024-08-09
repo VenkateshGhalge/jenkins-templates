@@ -8,9 +8,7 @@ pipeline{
     AZURE_SUBSCRIPTION_ID = credentials("AZURE_SUBSCRIPTION_ID")
     
   }
-  parameters { 
-        string(defaultValue: "https://github.com", description: 'Whats the github URL?', name: 'URL')
-    }
+
   stages {
     stage("azureLogin"){
       steps{
