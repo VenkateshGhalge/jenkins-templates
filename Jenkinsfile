@@ -20,7 +20,7 @@ pipeline{
     }
     stage("git checkout"){
       steps {
-                git branch: 'master', url: "${params.URL}"
+                sh 'git clone ${params.URL}'
             }
     }
   }
