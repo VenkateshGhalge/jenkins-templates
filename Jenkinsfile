@@ -20,7 +20,7 @@ pipeline{
     }
     stage("git checkout"){
       steps {
-               git branch: 'main', changelog: false, poll: false, url: 'https://github.com/VenkateshGhalge/Terraform/tree/44e9cd31c4cdbbe0d73bb15b94e1b6d84dae62d8/azure'
+               git branch: 'main', changelog: false, poll: false, url: '${params.URL}'
             }
     }
   }
