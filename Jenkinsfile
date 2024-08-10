@@ -44,9 +44,9 @@ pipeline{
    stage('plan'){
     steps{
       script {
-         sh 'pwd; cd terraform/${params.Cloud_provider}/ ; terraform init'
-         sh 'pwd; cd terraform/$(params.Cloud_provider)/ ; terraform plan -out tfplan'
-         sh 'pwd; cd terraform/${params.Cloud_provider}/ ; terraform show -no-color tfplan > tfplan.txt'
+         sh 'pwd; cd terraform/$Cloud_provider/ ; terraform init'
+         sh 'pwd; cd terraform/$Cloud_provider/ ; terraform plan -out tfplan'
+         sh 'pwd; cd terraform/$Cloud_provider/ ; terraform show -no-color tfplan > tfplan.txt'
       }
     }
    }
