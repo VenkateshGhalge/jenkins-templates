@@ -13,13 +13,6 @@ pipeline{
     } 
 
   stages {
-    stage('azureLogin'){
-      steps{
-        
-            sh 'az login --service-principal -u $AZURE_CLIENT_ID -p $AZURE_CLIENT_SECRET -t $AZURE_TENANT_ID'
-            
-        }         
-    }
     stage('git checkout'){
       steps {
              script{
