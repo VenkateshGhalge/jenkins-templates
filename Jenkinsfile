@@ -52,7 +52,7 @@ pipeline{
    }
     stage('Apply') {
             steps {
-                sh "pwd;cd terraform/azure/ ;  ls -lrt ; terraform apply -input=false tfplan.txt"
+                sh "pwd;cd terraform/azure/ ;  ls -lrt ; terraform apply -input=false tfplan"
             }
         }
   }
