@@ -6,19 +6,31 @@ pipeline{
     AZURE_CLIENT_SECRET = credentials("AZURE_CLIENT_SECRET")
     AZURE_TENANT_ID = credentials("AZURE_TENANT_ID")
     AZURE_SUBSCRIPTION_ID = credentials("AZURE_SUBSCRIPTION_ID")
+
+    AWS_ACCESS_KEY_ID = credentials("AWS_ACCESS_KEY_ID")
+    AWS_SECRET_ACCESS_KEY = credentials("AWS_SECRET_ACCESS_KEY")
     
   }
  parameters {
         booleanParam(name: 'autoApprove', defaultValue: false, description: 'Automatically run apply after generating plan?')
         choice(name: 'Apply_Destory', choices: ['apply', 'destroy'], description: 'want to apply or destory resoures')
+        choice(name: 'Cloud_Provider', choices: ['aws', 'azure'], description: 'Which cloud provider you want')
     } 
 
   stages {
 
-   stage('azureLogin'){
+   stage('LogintoCloud'){
       steps{
+         script{
+            if(params.Cloud_Provider == 'azure'){
             sh 'az login --service-principal -u $AZURE_CLIENT_ID -p $AZURE_CLIENT_SECRET -t $AZURE_TENANT_ID'
-        }         
+            }
+            if(prams.Cloud_Provider == 'aws' ){
+            sh 'echo we will be use access_key_id and secert_access_key Environment Variables' 
+            }
+           }
+         }
+       }         
     }
     stage('git checkout'){
       steps {
@@ -31,9 +43,11 @@ pipeline{
     }
    stage('plan'){
     steps{
-     sh 'pwd; cd terraform/azure/ ; terraform init'
-     sh 'pwd; cd terraform/azure/ ; terraform plan -out tfplan'
-     sh 'pwd; cd terraform/azure/ ; terraform show -no-color tfplan > tfplan.txt'
+      script {
+         sh 'pwd; cd terraform/{params.Cloud_Provider}/ ; terraform init'
+         sh 'pwd; cd terraform/(params.Cloud_Provider)/ ; terraform plan -out tfplan'
+         sh 'pwd; cd terraform/{params.Cloud_Provider}/ ; terraform show -no-color tfplan > tfplan.txt'
+      }
     }
    }
 
