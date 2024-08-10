@@ -66,8 +66,17 @@ pipeline{
     }
    }
     stage('Apply or Destory') {
+          when {
+           expression { params.Apply_Destory == 'apply'}
+          }
             steps {
                 sh 'pwd;cd terraform/$Cloud_provider/ ;  ls -lrt ; terraform $Apply_Destory -input=false tfplan'
+            }
+          when {
+           expression { params.Apply_Destory == 'destory'}
+          }
+           steps {
+                sh 'pwd;cd terraform/$Cloud_provider/ ;  ls -lrt ; terraform $Apply_Destory'
             }
         }
   }
