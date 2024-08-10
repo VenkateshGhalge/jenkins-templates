@@ -14,7 +14,7 @@ pipeline{
  parameters {
         booleanParam(name: 'autoApprove', defaultValue: false, description: 'Automatically run apply after generating plan?')
         choice(name: 'Apply_Destory', choices: ['apply', 'destroy'], description: 'want to apply or destory resoures')
-        choice(name: 'Cloud_Provider', choices: ['aws', 'azure'], description: 'Which cloud provider you want')
+        string(defaultValue: 'aws', description: 'default value is aws, if you want to use azure please type azure', name: 'Cloud_provider')
     } 
 
   stages {
@@ -22,10 +22,10 @@ pipeline{
    stage('LogintoCloud'){
       steps{
          script{
-            if(${params.Cloud_Provider} == 'azure'){
+            if(${params.Cloud_provider} == 'azure'){
             sh 'az login --service-principal -u $AZURE_CLIENT_ID -p $AZURE_CLIENT_SECRET -t $AZURE_TENANT_ID'
             }
-            if(${prams.Cloud_Provider} == 'aws' ){
+            if(${prams.Cloud_provider} == 'aws' ){
             sh 'echo we will be use access_key_id and secert_access_key Environment Variables' 
             }
            }
