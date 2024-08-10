@@ -22,10 +22,10 @@ pipeline{
    stage('LogintoCloud'){
       steps{
          script{
-            if(${params.Cloud_provider} == 'azure'){
+            if('${params.Cloud_provider}' == 'azure'){
             sh 'az login --service-principal -u $AZURE_CLIENT_ID -p $AZURE_CLIENT_SECRET -t $AZURE_TENANT_ID'
             }
-            if(${prams.Cloud_provider} == 'aws' ){
+            if('${prams.Cloud_provider}' == 'aws' ){
             sh 'echo we will be use access_key_id and secert_access_key Environment Variables' 
             }
            }
