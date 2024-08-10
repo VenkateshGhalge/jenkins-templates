@@ -75,7 +75,7 @@ pipeline{
     }
    stage('Destory'){
           when {
-           expression { params.Apply_Destory == 'destory'}
+           expression { params.Apply_Destory == 'destroy'}
           }
            steps {
                 sh 'pwd;cd terraform/$Cloud_provider/ ;  ls -lrt ; terraform $Apply_Destory'
