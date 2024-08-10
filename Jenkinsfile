@@ -31,7 +31,7 @@ pipeline{
            }
          }
        }         
-    }
+    
     stage('git checkout'){
       steps {
              script{
@@ -71,4 +71,5 @@ pipeline{
             }
         }
   }
+}
 
