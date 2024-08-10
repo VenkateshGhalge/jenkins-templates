@@ -10,7 +10,7 @@ pipeline{
   }
  parameters {
         booleanParam(name: 'autoApprove', defaultValue: false, description: 'Automatically run apply after generating plan?')
-        choice(name: 'Apply or Destory', choices: [apply', 'destroy'], description: 'want to apply or destory resoures')
+        choice(name: 'Apply or Destory', choices: ['apply', 'destroy'], description: 'want to apply or destory resoures')
     } 
 
   stages {
