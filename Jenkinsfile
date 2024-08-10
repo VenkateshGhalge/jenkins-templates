@@ -75,6 +75,9 @@ pipeline{
     }
    stage('Destory'){
           when {
+           not{
+              equals expected: true, actual: params.autoApprove
+              }
            expression { params.Apply_Destory == 'destroy'}
           }
            steps {
