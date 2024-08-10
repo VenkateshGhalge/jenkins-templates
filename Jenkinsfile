@@ -75,13 +75,10 @@ pipeline{
     }
    stage('Destory'){
           when {
-           not{
-              equals expected: true, actual: params.autoApprove
-              }
            expression { params.Apply_Destory == 'destroy'}
           }
            steps {
-                sh 'pwd;cd terraform/$Cloud_provider/ ;  ls -lrt ; terraform $Apply_Destory'
+                sh 'pwd;cd terraform/$Cloud_provider/ ;  ls -lrt ; terraform $Apply_Destory -auto-approve'
             }
         }
   }
