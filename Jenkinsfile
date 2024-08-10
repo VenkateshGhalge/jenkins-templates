@@ -9,7 +9,7 @@ pipeline{
 
     AWS_ACCESS_KEY_ID = credentials("AWS_ACCESS_KEY_ID")
     AWS_SECRET_ACCESS_KEY = credentials("AWS_SECRET_ACCESS_KEY")
-    
+    Cloud_Provider = '${params.Cloud_provider}'
   }
  parameters {
         booleanParam(name: 'autoApprove', defaultValue: false, description: 'Automatically run apply after generating plan?')
@@ -22,10 +22,10 @@ pipeline{
    stage('LogintoCloud'){
       steps{
          script{
-            if('$Cloud_provider' == 'azure'){
+            if(env.Cloud_provider == 'azure'){
             sh 'az login --service-principal -u $AZURE_CLIENT_ID -p $AZURE_CLIENT_SECRET -t $AZURE_TENANT_ID'
             }
-            if('$Cloud_provider' == 'aws' ){
+            if(env.Cloud_provider == 'aws' ){
             sh 'echo we will be use access_key_id and secert_access_key Environment Variables' 
             }
            }
