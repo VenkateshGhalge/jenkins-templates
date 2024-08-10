@@ -32,7 +32,7 @@ pipeline{
     steps{
      sh 'pwd; cd terraform/azure/ ; terraform init'
      sh 'pwd; cd terraform/azure/ ; terraform plan -out tfplan'
-     sh 'pwd; cd terraform/azure/ ; terraform show -no-colour tfplan > tfplan.txt'
+     sh 'pwd; cd terraform/azure/ ; terraform show -no-color tfplan > tfplan.txt'
     }
    }
 
