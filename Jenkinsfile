@@ -9,7 +9,7 @@ pipeline{
 
     AWS_ACCESS_KEY_ID = credentials("AWS_ACCESS_KEY_ID")
     AWS_SECRET_ACCESS_KEY = credentials("AWS_SECRET_ACCESS_KEY")
-    Cloud_Provider = '${params.Cloud_provider}'
+ 
   }
  parameters {
         booleanParam(name: 'autoApprove', defaultValue: false, description: 'Automatically run apply after generating plan?')
@@ -44,9 +44,9 @@ pipeline{
    stage('plan'){
     steps{
       script {
-         sh 'pwd; cd terraform/${params.Cloud_provider}/ ; terraform init'
-         sh 'pwd; cd terraform/${params.Cloud_provider}/ ; terraform plan -out tfplan'
-         sh 'pwd; cd terraform/${params.Cloud_provider}/ ; terraform show -no-color tfplan > tfplan.txt'
+         sh 'pwd; cd terraform/$Cloud_provider/ ; terraform init'
+         sh 'pwd; cd terraform/$Cloud_provider/ ; terraform plan -out tfplan'
+         sh 'pwd; cd terraform/$Cloud_provider/ ; terraform show -no-color tfplan > tfplan.txt'
       }
     }
    }
