@@ -22,10 +22,10 @@ pipeline{
    stage('LogintoCloud'){
       steps{
          script{
-            if(params.Cloud_Provider == 'azure'){
+            if(${params.Cloud_Provider} == 'azure'){
             sh 'az login --service-principal -u $AZURE_CLIENT_ID -p $AZURE_CLIENT_SECRET -t $AZURE_TENANT_ID'
             }
-            if(prams.Cloud_Provider == 'aws' ){
+            if(${prams.Cloud_Provider} == 'aws' ){
             sh 'echo we will be use access_key_id and secert_access_key Environment Variables' 
             }
            }
@@ -44,9 +44,9 @@ pipeline{
    stage('plan'){
     steps{
       script {
-         sh 'pwd; cd terraform/{params.Cloud_Provider}/ ; terraform init'
-         sh 'pwd; cd terraform/(params.Cloud_Provider)/ ; terraform plan -out tfplan'
-         sh 'pwd; cd terraform/{params.Cloud_Provider}/ ; terraform show -no-color tfplan > tfplan.txt'
+         sh 'pwd; cd terraform/${params.Cloud_Provider}/ ; terraform init'
+         sh 'pwd; cd terraform/$(params.Cloud_Provider)/ ; terraform plan -out tfplan'
+         sh 'pwd; cd terraform/${params.Cloud_Provider}/ ; terraform show -no-color tfplan > tfplan.txt'
       }
     }
    }
