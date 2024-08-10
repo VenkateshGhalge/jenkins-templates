@@ -10,16 +10,19 @@ pipeline{
   }
  parameters {
         booleanParam(name: 'autoApprove', defaultValue: false, description: 'Automatically run apply after generating plan?')
+        choice(name: 'Apply or Destory', choices: [apply', 'destroy'], description: 'want to apply or destory resoures')
     } 
 
   stages {
 
    stage('azureLogin'){
+     figlet 'azureLogin'
       steps{
             sh 'az login --service-principal -u $AZURE_CLIENT_ID -p $AZURE_CLIENT_SECRET -t $AZURE_TENANT_ID'
         }         
     }
     stage('git checkout'){
+     figlet 'git checkout'
       steps {
              script{
                  dir("terraform"){
@@ -29,6 +32,7 @@ pipeline{
             }
     }
    stage('plan'){
+     figlet 'plan'
     steps{
      sh 'pwd; cd terraform/azure/ ; terraform init'
      sh 'pwd; cd terraform/azure/ ; terraform plan -out tfplan'
@@ -37,6 +41,7 @@ pipeline{
    }
 
    stage('Approval'){
+    figlet 'Approval'
     when {
       not{
        equals expected: true, actual: params.autoApprove
@@ -50,7 +55,8 @@ pipeline{
      }
     }
    }
-    stage('Apply') {
+    stage('Apply or Destory') {
+      figlet 'Apply or Destory'
             steps {
                 sh "pwd;cd terraform/azure/ ;  ls -lrt ; terraform apply -input=false tfplan"
             }
