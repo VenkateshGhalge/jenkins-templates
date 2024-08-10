@@ -67,7 +67,7 @@ pipeline{
    }
     stage('Apply or Destory') {
             steps {
-                sh "pwd;cd terraform/azure/ ;  ls -lrt ; terraform ${params.Apply_Destory} -input=false tfplan"
+                sh 'pwd;cd terraform/$Cloud_provider/ ;  ls -lrt ; terraform $Apply_Destory -input=false tfplan'
             }
         }
   }
